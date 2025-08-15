@@ -1,10 +1,12 @@
 import db from '@/database/db';
 
+const database = await db;
+
 // FETCHING DATA
 export const getTodos = async () => {
   const query = 'SELECT * FROM TODOS';
   try {
-    const result = await db.getAllAsync(query);
+    const result = await database.getAllAsync(query);
     return result;
   } catch (error) {
     console.error('Error fetching todos:', error);
@@ -15,7 +17,7 @@ export const getTodos = async () => {
 export const getDones = async () => {
   const query = 'SELECT * FROM DONES';
   try {
-    const result = await db.getAllAsync(query);
+    const result = await database.getAllAsync(query);
     return result;
   } catch (error) {
     console.error('Error fetching dones:', error);
@@ -35,7 +37,7 @@ export const insertTodo = async ({
 }): Promise<number> => {
   const query = 'INSERT INTO TODOS (subject, details, deadline) VALUES (?, ?, ?)';
   try {
-    const result = await db.runAsync(query, [subject, details, deadline]);
+    const result = await database.runAsync(query, [subject, details, deadline]);
     return result.lastInsertRowId;
   } catch (error) {
     console.error('Error inserting todo:', error);
@@ -50,7 +52,7 @@ export const insertDone = async ({
 }): Promise<number> => {
   const query = 'INSERT INTO DONES (todo) VALUES (?)';
   try {
-    const result = await db.runAsync(query, [todo]);
+    const result = await database.runAsync(query, [todo]);
     return result.lastInsertRowId;
   } catch (error) {
     console.error('Error inserting done:', error);
@@ -66,7 +68,7 @@ export const deleteTodo = async ({
 }): Promise<void> => {
   const query = 'DELETE FROM TODOS WHERE id = ?';
   try {
-    await db.runAsync(query, [id]);
+    await database.runAsync(query, [id]);
   } catch (error) {
     console.error('Error deleting todo:', error);
     throw error;
@@ -80,7 +82,7 @@ export const deleteDone = async ({
 }): Promise<void> => {
   const query = 'DELETE FROM DONES WHERE id = ?';
   try {
-    await db.runAsync(query, [id]);
+    await database.runAsync(query, [id]);
   } catch (error) {
     console.error('Error deleting done:', error);
     throw error;
