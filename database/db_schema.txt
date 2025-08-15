@@ -1,0 +1,9 @@
+TODOS
+- id: int
+- subject: str
+- details: str
+- deadline: datetime
+
+DONES
+- id: int
+- todo: int             # FK at TODOS.id
