@@ -2,7 +2,7 @@ export const createTables = [
   `CREATE TABLE IF NOT EXISTS TODOS (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     subject TEXT NOT NULL,
-    details TEXT,
+    details TEXT NOT NULL,
     deadline DATETIME NOT NULL
   );`,
 
