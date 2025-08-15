@@ -1,0 +1,14 @@
+export const createTables = [
+  `CREATE TABLE IF NOT EXISTS TODOS (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    subject TEXT NOT NULL,
+    details TEXT,
+    deadline DATETIME NOT NULL
+  );`,
+
+  `CREATE TABLE IF NOT EXISTS DONES (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    todo INTEGER NOT NULL,
+    FOREIGN KEY(todo) REFERENCES TODOS(id)
+  );`
+];
