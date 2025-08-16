@@ -7,6 +7,7 @@ import { initDatabase } from '@/database/migrations';
 import { getTodos, getDones, insertTodo, insertDone, deleteTodo } from '@/database/services';
 
 export default function TabOneScreen() {
+  // DECLARATIONS
   const [todos, setTodos] = useState<unknown[] | null>(null);
   const [dones, setDones] = useState<unknown[] | null>(null);
   const [todoSubject, setTodoSubject] = useState('');
@@ -58,6 +59,14 @@ export default function TabOneScreen() {
     }
   };
 
+  // CONDITIONAL RENDERING
+  if (todos === null) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Loading...</Text>
+      </View>
+    )
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>
