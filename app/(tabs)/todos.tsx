@@ -67,13 +67,22 @@ export default function TabOneScreen() {
       </View>
     )
   };
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/todos.tsx" />
-    </View>
-  );
+
+  if (todos.length > 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Todos</Text>
+      </View>
+    )
+  };
+
+  if (todos.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>No Todos</Text>
+      </View>
+    )
+  };
 }
 
 const styles = StyleSheet.create({
