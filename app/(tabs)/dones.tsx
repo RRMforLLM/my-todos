@@ -1,9 +1,39 @@
 import { StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
+import { initDatabase } from '@/database/migrations';
+import { getDones, deleteDone, deleteTodo } from '@/database/services';
 
 export default function TabTwoScreen() {
+  const [dones, setDones] = useState<unknown[] | null>(null);
+  
+  useEffect(() => {
+    const setup = async () => {
+      await initDatabase();
+      const fetchedDones = await getDones();
+      setDones(fetchedDones);
+    };
+    setup();
+  }, []);
+
+  const removeDone = async (id: number) => {
+    try {
+      await deleteDone({ id: id });
+    } catch(error) {
+      console.error('Error undoing done:', error);
+    }
+  };
+
+  const removeTodo = async (id: number) => {
+    try {
+      await deleteTodo({ id: id });
+    } catch(error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
