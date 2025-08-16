@@ -7,6 +7,7 @@ import { initDatabase } from '@/database/migrations';
 import { getDones, deleteDone, deleteTodo } from '@/database/services';
 
 export default function TabTwoScreen() {
+  // DECLARATIONS
   const [dones, setDones] = useState<unknown[] | null>(null);
   
   useEffect(() => {
@@ -34,13 +35,30 @@ export default function TabTwoScreen() {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/dones.tsx" />
-    </View>
-  );
+  // CONDITIONAL RENDERING
+  if (dones === null) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Loading...</Text>
+      </View>
+    )
+  };
+
+  if (dones.length > 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Dones</Text>
+      </View>
+    )
+  };
+
+  if (dones.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>No Dones</Text>
+      </View>
+    )
+  };
 }
 
 const styles = StyleSheet.create({
