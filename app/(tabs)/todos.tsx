@@ -48,15 +48,15 @@ export default function TabOneScreen() {
     } catch(error) {
       console.error('Error doing todo:', error);
     }
-  }
+  };
 
-  const deleteTodo = async (id: number) => {
+  const removeTodo = async (id: number) => {
     try {
-      await deleteTodo(id);
+      await deleteTodo({ id: id });
     } catch(error) {
       console.error('Error deleting todo:', error);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
